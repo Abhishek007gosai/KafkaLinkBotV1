@@ -4,13 +4,13 @@ from os import environ
 import logging
 from logging.handlers import RotatingFileHandler
 
-TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "8040464811:AAHOVwkYCcehCnwFLcMtkZUaqSMEzGHLm_o")
+TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "")
 BOT_USERNAME = 'KafkaX_Bot'
 APP_ID = int(os.environ.get("APP_ID", "29245477"))
 API_HASH = os.environ.get("API_HASH", "0abc83883262245c90ca337b7a0375c4")
 OWNER_ID = int(os.environ.get("OWNER_ID", "8667251104"))
 PORT = os.environ.get("PORT", "8080")
-DB_URL = os.environ.get("DB_URI", "mongodb+srv://Kafka:Au3OoWzCDYJKeuHU@cluster0.lz2m8iy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+DB_URL = os.environ.get("DB_URI", "")
 DB_NAME = os.environ.get("DB_NAME", "cluster0")
 TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "40"))
 COMMAND_PHOTO = os.environ.get("COMMAND_PHOTO", "https://files.catbox.moe/hp9jnl.jpg")  # Replace with your photo URL
