@@ -21,7 +21,7 @@ HELP_TXT =  os.environ.get("HELP_MESSAGE", "<b><blockquote>ᴡᴇʟᴄᴏᴍᴇ 
 FSUB_PIC = os.environ.get("FSUB_PIC", "https://files.catbox.moe/hp9jnl.jpg")
 FSUB_LINK_EXPIRY = 300
 LOG_FILE_NAME = "CantarellaBots.txt"
-DATABASE_CHANNEL = int(os.environ.get("DATABASE_CHANNEL", "-1003746574484"))
+DATABASE_CHANNEL = "-1002456565415"
 
 logging.basicConfig(
     level=logging.INFO,
