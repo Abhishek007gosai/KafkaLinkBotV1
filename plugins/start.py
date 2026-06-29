@@ -94,10 +94,10 @@ def check_fsub(func):
 
 async def not_joined(client: Client, message: Message):
     logger.debug(f"not_joined function called for user {message.from_user.id}")
-    temp = await message.reply("<b><i>ᴡᴀɪᴛ ᴀ sᴇᴄ..</i></b>")
 
+    temp = await message.reply("<b><i>ᴡᴀɪᴛ ᴀ sᴇᴄ..</i></b>")
     if not temp:
-        logger.warning("Failed to send temporary message in not_joined")
+        logger.warning("Failed to send temporary message.")
         return
 
     user_id = message.from_user.id
@@ -121,7 +121,7 @@ async def not_joined(client: Client, message: Message):
             except UserNotParticipant:
                 is_member = False
             except Exception as e:
-                logger.error(f"Error checking member in not_joined: {e}")
+                logger.error(f"Error checking member: {e}")
 
             if not is_member:
                 try:
@@ -131,7 +131,6 @@ async def not_joined(client: Client, message: Message):
                         data = await client.get_chat(chat_id)
                         chat_data_cache[chat_id] = data
 
-                    name = data.title
                     mode = await Seishiro.get_channel_mode(chat_id)
 
                     if mode == "on" and not data.username:
@@ -153,66 +152,70 @@ async def not_joined(client: Client, message: Message):
                             )
                             link = invite.invite_link
 
-                    buttons.append([InlineKeyboardButton(text=name, url=link)])
+                    buttons.append([
+                        InlineKeyboardButton(
+                            text="• 𝙹𝙾𝙸𝙽 𝙲𝙷𝘼𝙽𝙽𝙴𝙻 •",
+                            url=link
+                        )
+                    ])
+
                     count += 1
 
                     try:
                         await temp.edit(f"<b>{'! ' * count}</b>")
-                    except Exception as e:
-                        logger.warning(f"Failed to edit message in not_joined: {e}")
-
-                except Exception as e:
-                    logger.error(f"Error processing channel {chat_id}: {e}")
-
-        # Add this button ONLY ONCE after all channel buttons
-        buttons.append([
-            InlineKeyboardButton(
-                text="• 𝙹𝙾𝙸𝙽 𝙲𝙷𝘼𝙽𝙽𝙴𝙻 •",
-                url="https://t.me/+HUIqsxBkZtxhNTA1"
-            )
-        ])
-
-        # Example:
-        # await temp.edit_text(
-        #     "Join all required channels.",
-        #     reply_markup=InlineKeyboardMarkup(buttons)
-        # )
-
-    except Exception as e:
-        logger.error(f"Error in not_joined: {e}")
+                    except Exception:
+                        pass
 
                 except Exception as e:
                     logger.error(f"Error with chat {chat_id}: {e}")
                     await temp.edit(
-                        f"<b><i>! Eʀʀᴏʀ, Cᴏɴᴛᴀᴄᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ ᴛᴏ sᴏʟᴠᴇ ᴛʜᴇ ɪssᴜᴇs @EternalsHelplineBot</i></b>\n"
-                        f"<blockquote expandable><b>Rᴇᴀsᴏɴ:</b> {e}</blockquote>"
+                        f"<b><i>! Eʀʀᴏʀ, Cᴏɴᴛᴀᴄᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ.</i></b>\n"
+                        f"<blockquote expandable><b>Reason:</b> {e}</blockquote>"
                     )
                     return
 
+        # Single extra button at the bottom
+        buttons.append([
+            InlineKeyboardButton(
+                text="• 𝙹𝙾𝙸𝙽 𝙲𝙷𝘼𝙽𝙉𝙀𝙇 •",
+                url="https://t.me/+HUIqsxBkZtxhNTA1"
+            )
+        ])
+
+        # Joined button
         try:
             buttons.append([
                 InlineKeyboardButton(
-                    text='• Jᴏɪɴᴇᴅ •',
+                    text="• Jᴏɪɴᴇᴅ •",
                     url=f"https://t.me/{BOT_USERNAME}?start={message.command[1]}"
                 )
             ])
         except IndexError:
             pass
 
-        text = "<b>ʜᴇʟʟᴏ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴏᴜʀ ᴄʜᴀɴɴᴇʟs ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ ᴊᴏɪɴ ɪɴ ᴍʏ ᴄʜᴀɴɴᴇʟ/ɢʀᴏᴜᴘ ғɪʀsᴛ, ᴘʟᴇᴀsᴇ sᴜʙsᴄʀɪʙᴇ ᴛᴏ ᴏᴜʀ ᴄʜᴀɴɴᴇʟs ᴛʜʀᴏᴜɢʜ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ʙᴇʟᴏᴡ ᴀɴᴅ sᴛᴀʀᴛ ʙᴏᴛ ᴀɢᴀɪɴ<blockquote>ʜᴏᴡ ᴛᴏ ᴜsᴇ ʙᴏᴛ <a href=https://t.me/NexusTutorial/26>ᴛᴜᴛᴏʀɪᴀʟ ᴄʟɪᴄᴋ ʜᴇʀᴇ</a></blockquote></b>"
-        
-        logger.debug(f"Sending final reply photo to user {user_id}")
+        text = (
+            "<b>ʜᴇʟʟᴏ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴏᴜʀ ᴄʜᴀɴɴᴇʟs\n\n"
+            "ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ ᴊᴏɪɴ ɪɴ ᴍʏ ᴄʜᴀɴɴᴇʟ/ɢʀᴏᴜᴘ ғɪʀsᴛ.\n"
+            "ᴘʟᴇᴀsᴇ sᴜʙsᴄʀɪʙᴇ ᴛᴏ ᴀʟʟ ᴄʜᴀɴɴᴇʟs ᴜsɪɴɢ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ʙᴇʟᴏᴡ "
+            "ᴀɴᴅ ᴘʀᴇss <b>Jᴏɪɴᴇᴅ</b>.\n\n"
+            "<blockquote>ʜᴏᴡ ᴛᴏ ᴜsᴇ ʙᴏᴛ "
+            "<a href='https://t.me/NexusTutorial/26'>ᴛᴜᴛᴏʀɪᴀʟ ᴄʟɪᴄᴋ ʜᴇʀᴇ</a>"
+            "</blockquote></b>"
+        )
+
         await message.reply_photo(
             photo=FSUB_PIC,
             caption=text,
-            reply_markup=InlineKeyboardMarkup(buttons),
+            reply_markup=InlineKeyboardMarkup(buttons)
         )
+
+        await temp.delete()
 
     except Exception as e:
         logger.error(f"Final Error in not_joined: {e}")
         await temp.edit(
-            f"<b><i>! Eʀʀᴏʀ, Cᴏɴᴛᴀᴄᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ ᴛᴏ sᴏʟᴠᴇ ᴛʜᴇ ɪssᴜᴇs @EternalsHelplineBot</i></b>\n"
-            f"<blockquote expandable><b>Rᴇᴀsᴏɴ:</b> {e}</blockquote>"
+            f"<b><i>! Eʀʀᴏʀ, Cᴏɴᴛᴀᴄᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ.</i></b>\n"
+            f"<blockquote expandable><b>Reason:</b> {e}</blockquote>"
         )
     
 @Bot.on_message(filters.command('start') & filters.private)
