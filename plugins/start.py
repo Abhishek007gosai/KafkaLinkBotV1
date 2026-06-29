@@ -158,6 +158,13 @@ async def not_joined(client: Client, message: Message):
                         await temp.edit(f"<b>{'! ' * count}</b>")
                     except Exception as e:
                         logger.warning(f"Failed to edit message in not_joined: {e}")
+        # This button appears ONLY ONCE
+        buttons.append([
+            InlineKeyboardButton(
+                "• 𝙹𝙾𝙸𝙽 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 •",
+                url="https://t.me/+HUIqsxBkZtxhNTA1"
+            )
+        ])
 
 
                 except Exception as e:
