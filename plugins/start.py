@@ -96,7 +96,6 @@ async def not_joined(client: Client, message: Message):
     logger.debug(f"not_joined function called for user {message.from_user.id}")
     temp = await message.reply("<b><i>ᴡᴀɪᴛ ᴀ sᴇᴄ..</i></b>")
 
-    # Add a check to ensure temp message exists before proceeding
     if not temp:
         logger.warning("Failed to send temporary message in not_joined")
         return
@@ -107,6 +106,7 @@ async def not_joined(client: Client, message: Message):
 
     try:
         all_channels = await Seishiro.get_fsub_channels()
+
         for chat_id in all_channels:
             await message.reply_chat_action(ChatAction.TYPING)
 
@@ -121,7 +121,6 @@ async def not_joined(client: Client, message: Message):
             except UserNotParticipant:
                 is_member = False
             except Exception as e:
-                is_member = False
                 logger.error(f"Error checking member in not_joined: {e}")
 
             if not is_member:
@@ -139,7 +138,8 @@ async def not_joined(client: Client, message: Message):
                         invite = await client.create_chat_invite_link(
                             chat_id=chat_id,
                             creates_join_request=True,
-                            expire_date=datetime.utcnow() + timedelta(seconds=FSUB_LINK_EXPIRY) if FSUB_LINK_EXPIRY else None
+                            expire_date=datetime.utcnow() + timedelta(seconds=FSUB_LINK_EXPIRY)
+                            if FSUB_LINK_EXPIRY else None
                         )
                         link = invite.invite_link
                     else:
@@ -148,24 +148,38 @@ async def not_joined(client: Client, message: Message):
                         else:
                             invite = await client.create_chat_invite_link(
                                 chat_id=chat_id,
-                                expire_date=datetime.utcnow() + timedelta(seconds=FSUB_LINK_EXPIRY) if FSUB_LINK_EXPIRY else None
+                                expire_date=datetime.utcnow() + timedelta(seconds=FSUB_LINK_EXPIRY)
+                                if FSUB_LINK_EXPIRY else None
                             )
                             link = invite.invite_link
 
                     buttons.append([InlineKeyboardButton(text=name, url=link)])
                     count += 1
+
                     try:
                         await temp.edit(f"<b>{'! ' * count}</b>")
                     except Exception as e:
                         logger.warning(f"Failed to edit message in not_joined: {e}")
-        # This button appears ONLY ONCE
+
+                except Exception as e:
+                    logger.error(f"Error processing channel {chat_id}: {e}")
+
+        # Add this button ONLY ONCE after all channel buttons
         buttons.append([
             InlineKeyboardButton(
-                "• 𝙹𝙾𝙸𝙽 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 •",
+                text="• 𝙹𝙾𝙸𝙽 𝙲𝙷𝘼𝙽𝙽𝙴𝙻 •",
                 url="https://t.me/+HUIqsxBkZtxhNTA1"
             )
         ])
 
+        # Example:
+        # await temp.edit_text(
+        #     "Join all required channels.",
+        #     reply_markup=InlineKeyboardMarkup(buttons)
+        # )
+
+    except Exception as e:
+        logger.error(f"Error in not_joined: {e}")
 
                 except Exception as e:
                     logger.error(f"Error with chat {chat_id}: {e}")
