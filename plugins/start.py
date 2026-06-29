@@ -154,7 +154,7 @@ async def not_joined(client: Client, message: Message):
 
                     buttons.append([
                         InlineKeyboardButton(
-                            text="• 𝙹𝙾𝙸𝙽 𝙲𝙷𝘼𝙽𝙽𝙴𝙻 •",
+                            text="• 𝙹𝙾𝙸𝙽 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 •",
                             url=link
                         )
                     ])
@@ -177,7 +177,7 @@ async def not_joined(client: Client, message: Message):
         # Single extra button at the bottom
         buttons.append([
             InlineKeyboardButton(
-                text="• 𝙹𝙾𝙸𝙽 𝙲𝙷𝘼𝙽𝙉𝙀𝙇 •",
+                text="• 𝙹𝙾𝙸𝙽 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 •",
                 url="https://t.me/+HUIqsxBkZtxhNTA1"
             )
         ])
@@ -186,22 +186,14 @@ async def not_joined(client: Client, message: Message):
         try:
             buttons.append([
                 InlineKeyboardButton(
-                    text="• Jᴏɪɴᴇᴅ •",
+                    text="• 𝙹𝙾𝙸𝙽𝙴𝙳 •",
                     url=f"https://t.me/{BOT_USERNAME}?start={message.command[1]}"
                 )
             ])
         except IndexError:
             pass
 
-        text = (
-            "<b>ʜᴇʟʟᴏ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴏᴜʀ ᴄʜᴀɴɴᴇʟs\n\n"
-            "ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ ᴊᴏɪɴ ɪɴ ᴍʏ ᴄʜᴀɴɴᴇʟ/ɢʀᴏᴜᴘ ғɪʀsᴛ.\n"
-            "ᴘʟᴇᴀsᴇ sᴜʙsᴄʀɪʙᴇ ᴛᴏ ᴀʟʟ ᴄʜᴀɴɴᴇʟs ᴜsɪɴɢ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ʙᴇʟᴏᴡ "
-            "ᴀɴᴅ ᴘʀᴇss <b>Jᴏɪɴᴇᴅ</b>.\n\n"
-            "<blockquote>ʜᴏᴡ ᴛᴏ ᴜsᴇ ʙᴏᴛ "
-            "<a href='https://t.me/NexusTutorial/26'>ᴛᴜᴛᴏʀɪᴀʟ ᴄʟɪᴄᴋ ʜᴇʀᴇ</a>"
-            "</blockquote></b>"
-        )
+        text = ("<b>ʜᴇʟʟᴏ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴏᴜʀ ᴄʜᴀɴɴᴇʟs ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ ᴊᴏɪɴ ɪɴ ᴍʏ ᴄʜᴀɴɴᴇʟ/ɢʀᴏᴜᴘ ғɪʀsᴛ, ᴘʟᴇᴀsᴇ sᴜʙsᴄʀɪʙᴇ ᴛᴏ ᴏᴜʀ ᴄʜᴀɴɴᴇʟs ᴛʜʀᴏᴜɢʜ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ʙᴇʟᴏᴡ ᴀɴᴅ sᴛᴀʀᴛ ʙᴏᴛ ᴀɢᴀɪɴ<blockquote>ʜᴏᴡ ᴛᴏ ᴜsᴇ ʙᴏᴛ<a href='https://t.me/NexusTutorial/26'>ᴛᴜᴛᴏʀɪᴀʟ ᴄʟɪᴄᴋ ʜᴇʀᴇ</a></blockquote></b>")
 
         await message.reply_photo(
             photo=FSUB_PIC,
