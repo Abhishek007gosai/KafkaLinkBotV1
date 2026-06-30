@@ -174,14 +174,6 @@ async def not_joined(client: Client, message: Message):
                     )
                     return
 
-        # Single extra button at the bottom
-        buttons.append([
-            InlineKeyboardButton(
-                text="• 𝙹𝙾𝙸𝙽 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 •",
-                url="https://t.me/+HUIqsxBkZtxhNTA1"
-            )
-        ])
-
         # Joined button
         try:
             buttons.append([
